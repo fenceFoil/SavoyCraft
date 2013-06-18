@@ -1,0 +1,16 @@
+/client/
+/common/
+/fml/
+/patches/
+/MinecraftForge-Changelog.txt
+/MinecraftForge-Credits.txt
+/MinecraftForge-License.txt
+/Paulscode IBXM Library License.txt
+/Paulscode SoundSystem CodecIBXM License.txt
+/README-MinecraftForge.txt
+/forge.py
+/forge.pyc
+/forgeversion.properties
+/install.cmd
+/install.py
+/install.sh
