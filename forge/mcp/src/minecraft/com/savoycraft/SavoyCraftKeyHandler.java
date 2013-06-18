@@ -64,7 +64,7 @@ public class SavoyCraftKeyHandler extends KeyHandler {
 			SavoyCraft.getConductor().playScene("princessida:command");
 		} else {
 			Minecraft.getMinecraft().displayGuiScreen(
-					new TGFrame(null, 350, 150));
+					new TGFrame(null, 200, 150));
 		}
 	}
 

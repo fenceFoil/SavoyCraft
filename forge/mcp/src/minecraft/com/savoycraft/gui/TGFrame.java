@@ -39,6 +39,8 @@ import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquation;
 import aurelienribon.tweenengine.TweenManager;
+import aurelienribon.tweenengine.equations.Bounce;
+import aurelienribon.tweenengine.equations.Elastic;
 import aurelienribon.tweenengine.equations.Linear;
 import aurelienribon.tweenengine.equations.Quad;
 import aurelienribon.tweenengine.equations.Quint;
@@ -63,6 +65,7 @@ public class TGFrame extends GuiScreen {
 	}
 
 	private static final int FADE_OUT_WIDTH = 7;
+	private static final int ROPE_HEIGHT = 5;
 	private String typedKeys = "";
 	private GuiScreen backScreen;
 
@@ -72,7 +75,7 @@ public class TGFrame extends GuiScreen {
 	 */
 	private int frameWidth = 300, frameHeight = 200;
 
-	private int frameColor = 0xdd000000;
+	private int frameColor = 0xddeeeeaa;
 
 	private String frameTitle = "SavoyCraft";
 
@@ -80,12 +83,15 @@ public class TGFrame extends GuiScreen {
 
 	private LinkedList<EQBar> rightEQBars = new LinkedList<EQBar>();
 
+	private LinkedList<EQBar> leftCurtain = new LinkedList<EQBar>();
+	private LinkedList<EQBar> rightCurtain = new LinkedList<EQBar>();
+
 	private HashSet<TGComponent> components = new HashSet<TGComponent>();
 
 	public TGFrame(GuiScreen backScreen) {
 		this.backScreen = backScreen;
 	}
-	
+
 	@Deprecated
 	public TGFrame(GuiScreen backScreen, int width, int height) {
 		this.backScreen = backScreen;
@@ -93,6 +99,7 @@ public class TGFrame extends GuiScreen {
 	}
 
 	public void setUpEQBars() {
+		// Set up eq bars
 		int numBars = frameHeight / 16;
 
 		leftEQBars.clear();
@@ -119,6 +126,47 @@ public class TGFrame extends GuiScreen {
 			leftEQBars.get(i).setY(barY);
 			rightEQBars.get(i).setX(barRightX);
 			rightEQBars.get(i).setY(barY);
+		}
+
+		// Set up curtain bars
+		if (leftCurtain.size() == 0 && height != 0) {
+			leftCurtain.clear();
+			rightCurtain.clear();
+
+			int curtainBars = (height / 16) + 1;
+			for (int i = 0; i < curtainBars; i++) {
+				EQBar eqbar = new EQBar(0, 0, false);
+				if (i != ROPE_HEIGHT) {
+					eqbar.setRGBA(1.0f, 0, 0, 0.7f);
+				} else {
+					eqbar.setRGBA(1.0f, 1.0f, 0, 0.7f);
+				}
+				// eqbar.setProtrude(4);
+				leftCurtain.add(eqbar);
+
+				EQBar reqbar = new EQBar(0, 0, true);
+				if (i != ROPE_HEIGHT) {
+					reqbar.setRGBA(1.0f, 0, 0, 0.7f);
+				} else {
+					reqbar.setRGBA(1.0f, 1.0f, 0, 0.7f);
+				}
+				// reqbar.setProtrude(4);
+				rightCurtain.add(reqbar);
+			}
+		}
+
+		// Curtain positions
+		numBars = Math.min(leftCurtain.size(), rightCurtain.size());
+		barOffset = 0;
+		barLeftX = 0;
+		barRightX = width;
+		for (int i = 0; i < numBars; i++) {
+			int barY = i * 16;
+
+			leftCurtain.get(i).setX(barLeftX);
+			leftCurtain.get(i).setY(barY);
+			rightCurtain.get(i).setX(barRightX);
+			rightCurtain.get(i).setY(barY);
 		}
 	}
 
@@ -150,13 +198,19 @@ public class TGFrame extends GuiScreen {
 							/ 2 - 2, getFrameY() - 10 - 2,
 					fontRenderer.getStringWidth(frameTitle) + 4, 10 + 2,
 					FADE_OUT_WIDTH, frameColor);
-			drawString(
-					fontRenderer,
+			// drawString(
+			// fontRenderer,
+			// frameTitle,
+			// getFrameX()
+			// + (getFrameWidth() - fontRenderer
+			// .getStringWidth(frameTitle)) / 2,
+			// getFrameY() - 10, 0xffaaaaff);
+			fontRenderer.drawString(
 					frameTitle,
 					getFrameX()
 							+ (getFrameWidth() - fontRenderer
 									.getStringWidth(frameTitle)) / 2,
-					getFrameY() - 10, 0xff00ff00);
+					getFrameY() - 10, 0xff0000ff, false);
 		}
 	}
 
@@ -178,12 +232,19 @@ public class TGFrame extends GuiScreen {
 	}
 
 	private void drawEQBars() {
+		for (EQBar b : leftCurtain) {
+			b.draw();
+		}
+		for (EQBar b : rightCurtain) {
+			b.draw();
+		}
 		for (EQBar b : leftEQBars) {
 			b.draw();
 		}
 		for (EQBar b : rightEQBars) {
 			b.draw();
 		}
+
 	}
 
 	private void drawFrameBackground(int width, int height) {
@@ -245,7 +306,7 @@ public class TGFrame extends GuiScreen {
 	}
 
 	public int getFrameY() {
-		return (height - frameHeight) / 2;
+		return (height - frameHeight) / 8 * 5;
 	}
 
 	public void setFrameWidth(int frameWidth) {
@@ -357,6 +418,7 @@ public class TGFrame extends GuiScreen {
 		if (leftEQBars.size() <= 0) {
 			setUpEQBars();
 		}
+
 		updateEQBarPositions();
 
 		// Update components
@@ -390,7 +452,8 @@ public class TGFrame extends GuiScreen {
 		super.updateScreen();
 
 		if (!pulsedEQ) {
-			pulseEQ(1, true);
+			// pulseEQ(1, false);
+			animateCurtains(true);
 			pulsedEQ = true;
 		}
 	}
@@ -415,6 +478,64 @@ public class TGFrame extends GuiScreen {
 				pulseEQ(1, false);
 			}
 		});
+	}
+
+	protected void animateCurtains(boolean opening) {
+		int numBars = leftCurtain.size();
+
+		float maxProtrude = (float) width / 16f / 2f;
+		float ropeProtrude = 1.5f;
+		float bottomProtrude = 2.5f;
+
+		int duration = 3000;
+		TweenEquation equation = Sine.OUT;
+		int delay = 0;
+
+		// XXX: WARNING: CRASH ISSUES IF FEWER BARS THAN ROPE HEIGHT
+		// Above rope
+		for (int i = 0; i < ROPE_HEIGHT; i++) {
+			float protrude = maxProtrude
+					- ((maxProtrude - ropeProtrude) * ((float) i / (float) ROPE_HEIGHT));
+			leftCurtain.get(i).setProtrude(maxProtrude);
+			Tween.to(leftCurtain.get(i),
+					EQBarTweenAccessor.TWEEN_TYPE_PROTRUDE, duration)
+					.target(protrude).delay(delay).ease(equation)
+					.start(tweenManager);
+
+			rightCurtain.get(i).setProtrude(maxProtrude);
+			Tween.to(rightCurtain.get(i),
+					EQBarTweenAccessor.TWEEN_TYPE_PROTRUDE, duration)
+					.target(protrude).delay(delay).ease(equation)
+					.start(tweenManager);
+
+		}
+		// Rope
+		leftCurtain.get(ROPE_HEIGHT).setProtrude(maxProtrude);
+		rightCurtain.get(ROPE_HEIGHT).setProtrude(maxProtrude);
+		Tween.to(leftCurtain.get(ROPE_HEIGHT),
+				EQBarTweenAccessor.TWEEN_TYPE_PROTRUDE, duration)
+				.target(ropeProtrude).delay(delay).ease(equation)
+				.start(tweenManager);
+		Tween.to(rightCurtain.get(ROPE_HEIGHT),
+				EQBarTweenAccessor.TWEEN_TYPE_PROTRUDE, duration)
+				.target(ropeProtrude).delay(delay).ease(equation)
+				.start(tweenManager);
+		// Below rope
+		for (int i = ROPE_HEIGHT + 1; i < numBars; i++) {
+			float protrude = bottomProtrude
+					- ((bottomProtrude - ropeProtrude) * (1f - ((float) (i - ROPE_HEIGHT) / (float) (numBars - ROPE_HEIGHT))));
+			leftCurtain.get(i).setProtrude(maxProtrude);
+			Tween.to(leftCurtain.get(i),
+					EQBarTweenAccessor.TWEEN_TYPE_PROTRUDE, duration)
+					.target(protrude).delay(delay).ease(equation)
+					.start(tweenManager);
+			rightCurtain.get(i).setProtrude(maxProtrude);
+			Tween.to(rightCurtain.get(i),
+					EQBarTweenAccessor.TWEEN_TYPE_PROTRUDE, duration)
+					.target(protrude).delay(delay).ease(equation)
+					.start(tweenManager);
+
+		}
 	}
 
 	protected void pulseEQ(int count, final boolean sound) {
@@ -460,8 +581,8 @@ public class TGFrame extends GuiScreen {
 		private int x = 0;
 		private int y = 0;
 		private float r = 0;
-		private float g = 1.0f;
-		private float b = 0;
+		private float g = 0;
+		private float b = 1.0f;
 		private float a = 0.75f;
 		private boolean left = true;
 
@@ -568,6 +689,13 @@ public class TGFrame extends GuiScreen {
 
 		public void setA(float a) {
 			this.a = a;
+		}
+
+		public void setRGBA(float r, float g, float b, float a) {
+			setR(r);
+			setG(g);
+			setB(b);
+			setA(a);
 		}
 
 		public boolean isLeft() {
