@@ -225,10 +225,10 @@ public class TGFrame extends GuiScreen {
 	private void drawRectSideFade(int x, int y, int width, int height,
 			int fadePixels, int mainColor) {
 		drawRect(x, y, x + width, y + height, mainColor);
-		drawGradientRectH(x - fadePixels, y, x, y + height, 0x00000000,
-				mainColor);
+		drawGradientRectH(x - fadePixels, y, x, y + height,
+				0x00ffffff & mainColor, mainColor);
 		drawGradientRectH(x + width, y, x + width + FADE_OUT_WIDTH, y + height,
-				mainColor, 0x00000000);
+				mainColor, 0x00ffffff & mainColor);
 	}
 
 	private void drawEQBars() {
