@@ -228,7 +228,7 @@ public class TGTabbedPanel extends TGComponent {
 
 		// Draw components on selected tab
 		for (TGComponent c : getTabComponents(selectedTab)) {
-			c.mouseClicked(mx, my, button);
+			c.mouseClicked(mx, my - TAB_BUTTON_HEIGHT, button);
 		}
 
 		// Draw tab buttons
@@ -243,7 +243,7 @@ public class TGTabbedPanel extends TGComponent {
 
 		// Draw components on selected tab
 		for (TGComponent c : getTabComponents(selectedTab)) {
-			c.mouseMovedOrUp(mx, my, button);
+			c.mouseMovedOrUp(mx, my - TAB_BUTTON_HEIGHT, button);
 		}
 
 		// Draw tab buttons
