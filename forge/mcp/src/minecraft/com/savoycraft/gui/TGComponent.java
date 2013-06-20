@@ -334,7 +334,7 @@ public class TGComponent extends Gui {
 	}
 
 	protected void playSelectSound() {
-		Minecraft.getMinecraft().sndManager.playSoundFX("note.snare", 1.0F,
+		Minecraft.getMinecraft().sndManager.playSoundFX("note.harp", 1.0F,
 				1.0f);
 	}
 }
