@@ -41,7 +41,7 @@ public class TDEditCourseGui extends TGFrame {
 	public TDEditCourseGui(GuiScreen backScreen) {
 		super(backScreen);
 
-		setFrameSize(400, 200);
+		//setFrameSize(400, 200);
 		setFrameTitle("Editing Course");
 
 		tabs = new TGTabbedPanel(0, 0, 400, 200, false);

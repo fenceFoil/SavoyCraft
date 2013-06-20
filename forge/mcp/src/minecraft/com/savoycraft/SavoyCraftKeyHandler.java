@@ -29,6 +29,7 @@ import net.minecraft.client.settings.KeyBinding;
 
 import org.lwjgl.input.Keyboard;
 
+import com.savoycraft.gui.TDEditCourseGui;
 import com.savoycraft.gui.TGFrame;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
@@ -44,8 +45,8 @@ public class SavoyCraftKeyHandler extends KeyHandler {
 		// not the call
 		// keyDown should repeat as long as the key is down
 		super(new KeyBinding[] { new KeyBinding("SavoyCraft", Keyboard.KEY_L),
-				new KeyBinding("GUITest", Keyboard.KEY_G) },
-				new boolean[] { false, false });
+				new KeyBinding("GUITest", Keyboard.KEY_G) }, new boolean[] {
+				false, false });
 	}
 
 	@Override
@@ -59,12 +60,16 @@ public class SavoyCraftKeyHandler extends KeyHandler {
 		// Minecraft.getMinecraft().displayGuiScreen(new TGFrame(null, 350,
 		// 150));
 
-		if (kb.keyDescription.equals("SavoyCraft")) {
-			info("Key pressed for SavoyCraft!");
-			SavoyCraft.getConductor().playScene("princessida:command");
-		} else {
-			Minecraft.getMinecraft().displayGuiScreen(
-					new TGFrame(null, 200, 150));
+		if (Minecraft.getMinecraft().currentScreen == null) {
+			if (kb.keyDescription.equals("SavoyCraft")) {
+				info("Key pressed for SavoyCraft!");
+				SavoyCraft.getConductor().playScene("princessida:command");
+			} else {
+				// Minecraft.getMinecraft().displayGuiScreen(
+				// new TGFrame(null, 200, 150));
+				Minecraft.getMinecraft().displayGuiScreen(
+						new TDEditCourseGui(null));
+			}
 		}
 	}
 
