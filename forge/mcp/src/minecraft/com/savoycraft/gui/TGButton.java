@@ -67,16 +67,13 @@ public class TGButton extends TGComponent {
 		super.draw(mx, my);
 
 		// Draw wool background
-		drawBackground(TDTextureManager.GUI_TEX_1, 0, 0, 16, 16);
+		drawBackground(TDTextureManager.GUI_TEX_1, 0, 0, 16, 16, mx, my);
 
 		// Draw border
 		drawBorder(pressing ? -1 : 0);
 
 		// Draw text label
-		int color = getColorAsInt(fgColor);
-		if (pressing) {
-			color = getColorAsInt(bgColor);
-		}
+		int color = labelColor;
 		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 		int labelWidth = fr.getStringWidth(label);
 		int textX = getScreenX() + (width - labelWidth) / 2;

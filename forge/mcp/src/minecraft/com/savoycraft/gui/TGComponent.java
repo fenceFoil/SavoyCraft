@@ -25,10 +25,13 @@ import java.util.HashSet;
 import org.lwjgl.opengl.GL11;
 
 import com.savoycraft.resources.TDTextureManager;
+import com.savoycraft.util.ColorUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.util.ThreadDownloadResources;
 
 /**
  * 
@@ -44,10 +47,16 @@ public class TGComponent extends Gui {
 	protected int height;
 
 	/**
-	 * r g b a
+	 * colors are argb
 	 */
-	protected float[] fgColor = { 0, 1, 0, 1 };
-	protected float[] bgColor = { 0.2f, 0.2f, 0.2f, 1.0f };
+	protected int bgColor = 0xddeeeeaa;
+	protected int borderColor = 0xff0000ff;
+	protected int labelColor = 0xff0000ff;
+	protected int bgColorRollover = 0xffaaeeee;
+
+	// protected int bgColorDisabled;
+	// protected int borderColorDisabled;
+	// protected int labelColorDisabled;
 
 	/**
 	 * The offset required to show the component within a frame on the screen.
@@ -161,22 +170,6 @@ public class TGComponent extends Gui {
 		this.yScreenOffset = yScreenOffset;
 	}
 
-	public float[] getFgColor() {
-		return fgColor;
-	}
-
-	public void setFgColor(float[] fgColor) {
-		this.fgColor = fgColor;
-	}
-
-	public float[] getBgColor() {
-		return bgColor;
-	}
-
-	public void setBgColor(float[] bgColor) {
-		this.bgColor = bgColor;
-	}
-
 	/**
 	 * Draws the component
 	 * 
@@ -226,12 +219,10 @@ public class TGComponent extends Gui {
 		return false;
 	}
 
-	protected void setGLColorFG() {
-		GL11.glColor4f(fgColor[0], fgColor[1], fgColor[2], fgColor[3]);
-	}
-
-	protected void setGLColorBG() {
-		GL11.glColor4f(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
+	public void setGLColor(int argbColor) {
+		float[] c = ColorUtil.argbIntTo4f(argbColor);
+		System.out.println(Integer.toHexString(argbColor)+":"+c[0] + "," + c[1] + "," + c[2] + "," + c[3]);
+		GL11.glColor4f(c[0], c[1], c[2], c[3]);
 	}
 
 	/**
@@ -248,9 +239,13 @@ public class TGComponent extends Gui {
 	 * @param tHeight
 	 */
 	protected void drawBackground(String texture, int tu, int tv, int tWidth,
-			int tHeight) {
+			int tHeight, int mx, int my) {
 		// Bind and set up texture
-		setGLColorBG();
+		if (isMouseInside(mx, my)) {
+			setGLColor(bgColorRollover);
+		} else {
+			setGLColor(bgColor);
+		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
 		// Draw complete tiles
@@ -304,7 +299,7 @@ public class TGComponent extends Gui {
 	}
 
 	/**
-	 * Equivilant to drawBorder(0)
+	 * Equivalent to drawBorder(0)
 	 */
 	protected void drawBorder() {
 		drawBorder(0);
@@ -317,24 +312,23 @@ public class TGComponent extends Gui {
 	 *            can be negative
 	 */
 	protected void drawBorder(int expand) {
+		int color = borderColor;
 		// Draw sides, ignoring corners
 		drawVerticalLine(x + xScreenOffset - expand,
 				y + yScreenOffset - expand,
-				y + yScreenOffset + height + expand, getColorAsInt(fgColor));
+				y + yScreenOffset + height + expand, color);
 		drawVerticalLine(x + xScreenOffset + width + expand - 1, y
-				+ yScreenOffset, y + yScreenOffset + height - 1,
-				getColorAsInt(fgColor));
+				+ yScreenOffset, y + yScreenOffset + height - 1, color);
 		// Draw top and bottom
 		drawHorizontalLine(x + xScreenOffset - expand, x + xScreenOffset
-				+ width + expand - 1, y + yScreenOffset - expand,
-				getColorAsInt(fgColor));
+				+ width + expand - 1, y + yScreenOffset - expand, color);
 		drawHorizontalLine(x + xScreenOffset - expand, x + xScreenOffset
 				+ width + expand - 1, y + yScreenOffset + height + expand - 1,
-				getColorAsInt(fgColor));
+				color);
 	}
 
 	protected void playSelectSound() {
-		Minecraft.getMinecraft().sndManager.playSoundFX("note.harp", 1.0F,
-				1.0f);
+		Minecraft.getMinecraft().sndManager
+				.playSoundFX("note.harp", 1.0F, 1.0f);
 	}
 }

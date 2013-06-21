@@ -180,7 +180,7 @@ public class TGTabbedPanel extends TGComponent {
 
 		// Draw components on selected tab
 		for (TGComponent c : getTabComponents(selectedTab)) {
-			c.draw(mx, my);
+			c.draw(mx, my - TAB_BUTTON_HEIGHT);
 		}
 
 		// Draw tab buttons

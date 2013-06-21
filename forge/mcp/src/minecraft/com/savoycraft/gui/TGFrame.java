@@ -198,13 +198,6 @@ public class TGFrame extends GuiScreen {
 							/ 2 - 2, getFrameY() - 10 - 2,
 					fontRenderer.getStringWidth(frameTitle) + 4, 10 + 2,
 					FADE_OUT_WIDTH, frameColor);
-			// drawString(
-			// fontRenderer,
-			// frameTitle,
-			// getFrameX()
-			// + (getFrameWidth() - fontRenderer
-			// .getStringWidth(frameTitle)) / 2,
-			// getFrameY() - 10, 0xffaaaaff);
 			fontRenderer.drawString(
 					frameTitle,
 					getFrameX()
