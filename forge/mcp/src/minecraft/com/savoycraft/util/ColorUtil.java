@@ -46,7 +46,7 @@ public class ColorUtil {
 	 * @return r g b a
 	 */
 	public static float[] rgbaIntTo4f(int color) {
-		return new float[] { (float) ((color & 0xff000000) >> 24) / 255f,
+		return new float[] { (float) ((color & 0xff000000L) >> 24) / 255f,
 				(float) ((color & 0x00ff0000) >> 16) / 255f,
 				(float) ((color & 0x0000ff00) >> 8) / 255f,
 				(float) ((color & 0x000000ff) >> 0) / 255f };
