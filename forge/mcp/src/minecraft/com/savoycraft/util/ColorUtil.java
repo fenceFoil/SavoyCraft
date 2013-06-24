@@ -20,6 +20,8 @@
  */
 package com.savoycraft.util;
 
+import org.lwjgl.opengl.GL11;
+
 /**
  * Converters, based around converting to and from rgba float arrays to
  * variously arranged int representations.
@@ -92,6 +94,11 @@ public class ColorUtil {
 	 */
 	public static int floatsToArgbInt(float[] color) {
 		return (int) (color[3] * 255.0) << 24 + (int) (color[0] * 255.0) << 16 + (int) (color[1] * 255.0) << 8 + (int) (color[2] * 255.0) << 0;
+	}
+
+	public static void setGLColor(int argbColor) {
+		float[] c = argbIntTo4f(argbColor);
+		GL11.glColor4f(c[0], c[1], c[2], c[3]);
 	}
 
 }
