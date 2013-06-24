@@ -67,7 +67,7 @@ public class SavoyCraftKeyHandler extends KeyHandler {
 			} else {
 				// Minecraft.getMinecraft().displayGuiScreen(
 				// new TGFrame(null, 200, 150));
-				Minecraft.getMinecraft().displayGuiScreen(new TheaterGui(null, new Theater()));
+				Minecraft.getMinecraft().displayGuiScreen(new TheaterGui(null, new Theater("abc")));
 			}
 		}
 	}

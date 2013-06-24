@@ -23,6 +23,9 @@ package com.savoycraft.theater;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+import net.minecraft.client.Minecraft;
+
+import com.savoycraft.Rand;
 import com.savoycraft.User;
 import com.savoycraft.update.ModVersion;
 
@@ -43,11 +46,31 @@ public class Theater {
 	private LinkedList<Show> shows = new LinkedList<Show>();
 
 	/**
-	 * @param theatreCode 
+	 * @param theatreCode
 	 * 
 	 */
 	public Theater(String theatreCode) {
 		setTheaterID(theatreCode);
+		setName(generateName());
+	}
+
+	private static final String[] prefixes = { "The", "Blue", "Grande",
+			"Grand", "Star", "The New" };
+	private static final String[] suffixes = { "Theatre", "Theater",
+			"Opera House", "Opera", "Stage", "Centre" };
+
+	public static String generateName() {
+		StringBuilder name = new StringBuilder();
+		boolean forceSuffix = false;
+		if (Rand.om.nextBoolean()) {
+			name.append(prefixes[Rand.om.nextInt(prefixes.length)]).append(" ");
+			forceSuffix = true;
+		}
+		name.append(Minecraft.getMinecraft().thePlayer.getEntityName());
+		if (Rand.om.nextBoolean() || forceSuffix) {
+			name.append(" ").append(suffixes[Rand.om.nextInt(suffixes.length)]);
+		}
+		return name.toString();
 	}
 
 	public String getName() {

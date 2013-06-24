@@ -38,11 +38,9 @@ public class TheaterGui extends TGFrame {
 	private TGButton showsButton, troupeButton;
 
 	public TheaterGui(GuiScreen backScreen, final Theater theater) {
-		super(backScreen, "FenceFoil Theatre");
+		super(backScreen, theater.getName());
 		this.theater = theater;
 		setFrameSize(200, 130);
-
-		//add(new TGTextLabel(getFrameWidth() / 2, 5, "FenceFoil Theatre"));
 
 		showsButton = new TGButton(getFrameWidth() / 2 - 75, 30, 150, 20);
 		final TheaterGui thisGui = this;

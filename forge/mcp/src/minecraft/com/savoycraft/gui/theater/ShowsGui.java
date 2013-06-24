@@ -22,11 +22,17 @@ package com.savoycraft.gui.theater;
 
 import java.util.LinkedList;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 
 import com.savoycraft.tempoGui.TGButton;
 import com.savoycraft.tempoGui.TGFrame;
 import com.savoycraft.tempoGui.TGList;
+import com.savoycraft.tempoGui.TGListener;
+import com.savoycraft.tempoGui.event.TGAddButtonEvent;
+import com.savoycraft.tempoGui.event.TGEvent;
+import com.savoycraft.tempoGui.event.TGListEvent;
+import com.savoycraft.theater.Show;
 import com.savoycraft.theater.Theater;
 
 /**
@@ -38,29 +44,50 @@ public class ShowsGui extends TGFrame {
 	private TGButton showsButton, troupeButton;
 
 	public ShowsGui(GuiScreen backScreen, final Theater theater) {
-		super(backScreen, "SavoyCraft");
+		super(backScreen, "Shows");
 		this.theater = theater;
+
+		final GuiScreen thisGui = this;
+
 		// setFrameSize(200, 130);
 		setFrameSize(200, 180);
 
-		LinkedList<String> shows = new LinkedList<String>();
-		shows.add("The Creeperer");
-		shows.add("Trial by TNT");
-		shows.add("HMS Notchenjeb");
-		shows.add("Pirates of Penzance");
-		shows.add("Impatience");
-		shows.add("Creepolanthe");
-		shows.add("Princess Idle");
-		shows.add("The Minekado");
+		// Add list of shows
+		final LinkedList<String> shows = new LinkedList<String>();
+		for (Show s : theater.getShows()) {
+			shows.add(s.getName());
+		}
 
 		TGList list = new TGList(0, 20, getFrameWidth(), getFrameHeight() - 40,
 				false, 20, shows);
 		list.setAddButtonEnabled(true);
+		list.addListener(new TGListener() {
+
+			@Override
+			public void onTGEvent(TGEvent event) {
+				if (event instanceof TGAddButtonEvent) {
+					Show show = new Show();
+					Minecraft.getMinecraft().displayGuiScreen(
+							new NewShowGui(thisGui, theater, show));
+				} else if (event instanceof TGListEvent) {
+					Minecraft.getMinecraft().displayGuiScreen(
+							new ShowGui(thisGui, theater, theater.getShows()
+									.get(((TGListEvent) event).getIndex())));
+				}
+			}
+		});
 		add(list);
+
+		// Add back button
+		final GuiScreen backScreenFinal = backScreen;
+		add(new TGButton(0, getFrameHeight() - 18, getFrameWidth(), 16, "Back")
+				.addListener(new TGListener() {
+
+					@Override
+					public void onTGEvent(TGEvent event) {
+						Minecraft.getMinecraft().displayGuiScreen(
+								backScreenFinal);
+					}
+				}));
 	}
-	//
-	// private void updateButtonLabels() {
-	// showsButton.setLabel("Shows (" + theater.getShows().size() + ")");
-	// troupeButton.setLabel("Troupe (" + theater.getTroupe().size() + ")");
-	// }
 }

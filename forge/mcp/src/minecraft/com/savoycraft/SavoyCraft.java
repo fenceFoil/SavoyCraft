@@ -14,8 +14,10 @@ import com.fencefoil.signWatcher.SignWatcher;
 import com.fencefoil.signWatcher.interfaces.SignChangedListener;
 import com.savoycraft.bot.BotManager;
 import com.savoycraft.conductor.Conductor;
+import com.savoycraft.gui.theater.TheaterGui;
 import com.savoycraft.keyboard.KeypressManager;
 import com.savoycraft.opera.Operas;
+import com.savoycraft.theater.Theater;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.IScheduledTickHandler;
@@ -174,9 +176,13 @@ public class SavoyCraft implements IScheduledTickHandler {
 		String theatreCode = generateTheatreCode();
 
 		sign.signText[0] = "[Theatre]";
+		sign.signText[1] = "0B4P2tCaPXI-Mem";
+		sign.signText[2] = "dlMnVBUkF2VkE";
 		sign.signText[3] = theatreCode;
+		
+		Theater newTheater = new Theater(theatreCode);
 
-		Minecraft.getMinecraft().displayGuiScreen(null);
+		Minecraft.getMinecraft().displayGuiScreen(new TheaterGui(null, newTheater));
 
 		chat("New theatre created!");
 	}
@@ -189,11 +195,11 @@ public class SavoyCraft implements IScheduledTickHandler {
 	 * @return
 	 */
 	private String generateTheatreCode() {
-		String datePart = Long.toHexString(System.currentTimeMillis()) + "x";
+		String datePart = Long.toHexString(System.currentTimeMillis()) + " ";
 		int remainingChars = 15 - datePart.length();
 		while (datePart.length() < 15) {
 			// Random non-hex letters
-			datePart += (char) (110 + rand.nextInt(12));
+			datePart += (char) ('a' + rand.nextInt(26));
 		}
 		return datePart;
 	}
@@ -209,8 +215,8 @@ public class SavoyCraft implements IScheduledTickHandler {
 			return false;
 		}
 
-		if (line.equalsIgnoreCase("[Theater]")
-				|| line.equalsIgnoreCase("[Theatre]")) {
+		if (line.equalsIgnoreCase("[Thea")
+				|| line.equalsIgnoreCase("[Thea")) {
 			return true;
 		} else {
 			return false;
