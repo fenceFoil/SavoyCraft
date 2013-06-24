@@ -18,11 +18,13 @@
  * along with SavoyCraft. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package com.savoycraft.gui;
+package com.savoycraft.tempoGui;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+
+import com.savoycraft.tempoGui.event.TGEvent;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
@@ -261,10 +263,10 @@ public class TGTabbedPanel extends TGComponent {
 	}
 
 	@Override
-	public void setxScreenOffset(int xScreenOffset) {
+	public void setScreenOffsetX(int xScreenOffset) {
+		super.setScreenOffsetX(xScreenOffset);
 		updateTabButtons();
 		updateTabComponents();
-		super.setxScreenOffset(xScreenOffset);
 	}
 
 	protected void updateTabComponents() {
@@ -277,10 +279,10 @@ public class TGTabbedPanel extends TGComponent {
 	}
 
 	@Override
-	public void setyScreenOffset(int yScreenOffset) {
+	public void setScreenOffsetY(int yScreenOffset) {
+		super.setScreenOffsetY(yScreenOffset);
 		updateTabButtons();
 		updateTabComponents();
-		super.setyScreenOffset(yScreenOffset);
 	}
 
 }

@@ -18,24 +18,21 @@
  * along with SavoyCraft. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package com.savoycraft.gui;
+package com.savoycraft.tempoGui.event;
+
+import com.savoycraft.tempoGui.TGComponent;
 
 /**
+ * @author BJ
  *
  */
-public class TGEvent {
-	private TGComponent source;
+public class TGAddButtonEvent extends TGEvent {
 
-	public TGEvent(TGComponent source) {
-		super();
-		this.source = source;
+	/**
+	 * @param source
+	 */
+	public TGAddButtonEvent(TGComponent source) {
+		super(source);
 	}
 
-	public TGComponent getSource() {
-		return source;
-	}
-
-	public void setSource(TGComponent source) {
-		this.source = source;
-	}
 }

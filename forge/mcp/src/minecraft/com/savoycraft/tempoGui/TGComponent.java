@@ -18,20 +18,16 @@
  * along with SavoyCraft. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package com.savoycraft.gui;
+package com.savoycraft.tempoGui;
 
+import java.awt.Rectangle;
 import java.util.HashSet;
-
-import org.lwjgl.opengl.GL11;
-
-import com.savoycraft.resources.TDTextureManager;
-import com.savoycraft.util.ColorUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.ThreadDownloadResources;
+
+import com.savoycraft.tempoGui.event.TGEvent;
+import com.savoycraft.util.ColorUtil;
 
 /**
  * 
@@ -46,13 +42,19 @@ public class TGComponent extends Gui {
 	protected int width;
 	protected int height;
 
+	//public static final int DEFAULT_bgColor = 0xffeeee88;
+	public static final int DEFAULT_bgColor = 0xffffffcc;
+	public static final int DEFAULT_borderColor = 0xff111100;
+	public static final int DEFAULT_labelColor = 0xff000000;
+	public static final int DEFAULT_bgColorRollover = 0xffaaaaff;
+
 	/**
 	 * colors are argb
 	 */
-	protected int bgColor = 0xddeeeeaa;
-	protected int borderColor = 0xff0000ff;
-	protected int labelColor = 0xff0000ff;
-	protected int bgColorRollover = 0xffaaeeee;
+	protected int bgColor = DEFAULT_bgColor;
+	protected int borderColor = DEFAULT_borderColor;
+	protected int labelColor = DEFAULT_labelColor;
+	protected int bgColorRollover = DEFAULT_bgColorRollover;
 
 	// protected int bgColorDisabled;
 	// protected int borderColorDisabled;
@@ -78,6 +80,10 @@ public class TGComponent extends Gui {
 		super();
 		this.x = x;
 		this.y = y;
+	}
+
+	public TGComponent() {
+		super();
 	}
 
 	/**
@@ -153,7 +159,7 @@ public class TGComponent extends Gui {
 		return xScreenOffset;
 	}
 
-	public void setxScreenOffset(int xScreenOffset) {
+	public void setScreenOffsetX(int xScreenOffset) {
 		this.xScreenOffset = xScreenOffset;
 	}
 
@@ -162,11 +168,11 @@ public class TGComponent extends Gui {
 	}
 
 	public void setScreenOffset(int x, int y) {
-		setxScreenOffset(x);
-		setyScreenOffset(y);
+		setScreenOffsetX(x);
+		setScreenOffsetY(y);
 	}
 
-	public void setyScreenOffset(int yScreenOffset) {
+	public void setScreenOffsetY(int yScreenOffset) {
 		this.yScreenOffset = yScreenOffset;
 	}
 
@@ -219,12 +225,6 @@ public class TGComponent extends Gui {
 		return false;
 	}
 
-	public void setGLColor(int argbColor) {
-		float[] c = ColorUtil.argbIntTo4f(argbColor);
-		System.out.println(Integer.toHexString(argbColor)+":"+c[0] + "," + c[1] + "," + c[2] + "," + c[3]);
-		GL11.glColor4f(c[0], c[1], c[2], c[3]);
-	}
-
 	/**
 	 * Draws the background of the component, tiling the given texture
 	 * 
@@ -242,9 +242,9 @@ public class TGComponent extends Gui {
 			int tHeight, int mx, int my) {
 		// Bind and set up texture
 		if (isMouseInside(mx, my)) {
-			setGLColor(bgColorRollover);
+			ColorUtil.setGLColor(bgColorRollover);
 		} else {
-			setGLColor(bgColor);
+			ColorUtil.setGLColor(bgColor);
 		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
@@ -305,14 +305,17 @@ public class TGComponent extends Gui {
 		drawBorder(0);
 	}
 
+	protected void drawBorder(int expand) {
+		drawBorder(expand, borderColor);
+	}
+
 	/**
 	 * Draws a 1 pixel thick foreground-colored border around component
 	 * 
 	 * @param expand
 	 *            can be negative
 	 */
-	protected void drawBorder(int expand) {
-		int color = borderColor;
+	protected void drawBorder(int expand, int color) {
 		// Draw sides, ignoring corners
 		drawVerticalLine(x + xScreenOffset - expand,
 				y + yScreenOffset - expand,
@@ -328,7 +331,43 @@ public class TGComponent extends Gui {
 	}
 
 	protected void playSelectSound() {
-		Minecraft.getMinecraft().sndManager
-				.playSoundFX("note.harp", 1.0F, 1.0f);
+		Minecraft.getMinecraft().sndManager.playSoundFX("random.click", 1.0F,
+				1.0f);
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle(getX(), getY(), getWidth(), getHeight());
+	}
+
+	public int getBgColor() {
+		return bgColor;
+	}
+
+	public void setBgColor(int bgColor) {
+		this.bgColor = bgColor;
+	}
+
+	public int getBorderColor() {
+		return borderColor;
+	}
+
+	public void setBorderColor(int borderColor) {
+		this.borderColor = borderColor;
+	}
+
+	public int getLabelColor() {
+		return labelColor;
+	}
+
+	public void setLabelColor(int labelColor) {
+		this.labelColor = labelColor;
+	}
+
+	public int getBgColorRollover() {
+		return bgColorRollover;
+	}
+
+	public void setBgColorRollover(int bgColorRollover) {
+		this.bgColorRollover = bgColorRollover;
 	}
 }

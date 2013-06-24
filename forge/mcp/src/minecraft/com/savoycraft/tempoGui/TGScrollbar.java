@@ -18,28 +18,23 @@
  * along with SavoyCraft. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package com.savoycraft.gui;
+package com.savoycraft.tempoGui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
-import org.lwjgl.opengl.GL11;
-
 import com.savoycraft.resources.TDTextureManager;
+import com.savoycraft.tempoGui.event.TGEvent;
 
 /**
  * @author BJ
  * 
  */
-public class TGButton extends TGComponent {
-
+public class TGScrollbar extends TGComponent {
 	private boolean pressing;
-	private String label;
-
-	public TGButton(int x, int y, int width, int height, String label) {
-		super(x, y, width, height);
-		this.label = label;
-	}
+	private int mouseLastY;
+	private float position = 0;
+	private float sliderSizeRatio = 0;
 
 	/**
 	 * Makes a new TGButton, determining the width from the label
@@ -49,36 +44,44 @@ public class TGButton extends TGComponent {
 	 * @param height
 	 * @param label
 	 */
-	public TGButton(int x, int y, int height, String label) {
-		super(x, y);
-		setHeight(height);
-		setLabel(label);
-
-		// Calculate width
-		int labelWidth = Minecraft.getMinecraft().fontRenderer
-				.getStringWidth(label);
-		// Width is label width + 2 pixel margins at either end for border + 1
-		// pixel extra margin at either end
-		setWidth(labelWidth + 6);
+	public TGScrollbar(int x, int y, int width, int height) {
+		super(x, y, width, height);
 	}
 
 	@Override
 	public void draw(int mx, int my) {
 		super.draw(mx, my);
 
-		// Draw wool background
-		drawBackground(TDTextureManager.GUI_TEX_1, 0, 0, 16, 16, mx, my);
+		if (getSliderSizeRatio() < 1.0f) {
 
-		// Draw border
-		drawBorder(pressing ? -1 : 0);
+			int sliderHeight = Math.max(
+					(int) ((float) getHeight() * sliderSizeRatio), 8);
+			float sliderMovementRange = getHeight() - sliderHeight;
 
-		// Draw text label
-		int color = labelColor;
-		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
-		int labelWidth = fr.getStringWidth(label);
-		int textX = getScreenX() + (width - labelWidth) / 2;
-		int textY = getScreenY() + (height / 2) - 4;
-		fr.drawString(label, textX, textY, color);
+			if (pressing) {
+				float mouseDelta = my - mouseLastY;
+				if (sliderMovementRange != 0) {
+					float positionDelta = mouseDelta / sliderMovementRange;
+					setPosition(getPosition() + positionDelta);
+				}
+			}
+
+			int sliderY = (int) (sliderMovementRange * getPosition());
+
+			int sliderColor = borderColor;
+			if (isMouseInside(mx, my) || pressing) {
+				sliderColor = bgColorRollover;
+			}
+			// The + / - 1 are to not draw over the already-drawn border
+			drawRect(getX() + getScreenOffsetX() + 1, sliderY
+					+ getScreenOffsetY() + getY(), getX() + getScreenOffsetX()
+					+ getWidth() - 1, sliderY + sliderHeight - 1
+					+ getScreenOffsetY() + getY(), sliderColor);
+
+			drawBorder(0, borderColor);
+
+			mouseLastY = my;
+		}
 	}
 
 	@Override
@@ -88,6 +91,7 @@ public class TGButton extends TGComponent {
 		if (button == 0 && isMouseInside(mx, my) && !pressing) {
 			// Start pressing
 			pressing = true;
+			mouseLastY = my;
 			playSelectSound();
 		}
 	}
@@ -105,12 +109,20 @@ public class TGButton extends TGComponent {
 		}
 	}
 
-	public String getLabel() {
-		return label;
+	public float getPosition() {
+		return Math.max(Math.min(position, 1), 0);
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setPosition(float position) {
+		this.position = position;
+	}
+
+	public float getSliderSizeRatio() {
+		return sliderSizeRatio;
+	}
+
+	public void setSliderSizeRatio(float sliderSizeRatio) {
+		this.sliderSizeRatio = sliderSizeRatio;
 	}
 
 }

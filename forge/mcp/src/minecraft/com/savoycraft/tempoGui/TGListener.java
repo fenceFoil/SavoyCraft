@@ -18,7 +18,9 @@
  * along with SavoyCraft. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package com.savoycraft.gui;
+package com.savoycraft.tempoGui;
+
+import com.savoycraft.tempoGui.event.TGEvent;
 
 /**
  * @author BJ
