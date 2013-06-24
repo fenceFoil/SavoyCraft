@@ -50,7 +50,7 @@ public class UpdateResourcesThread extends Thread {
 
 		// Download the properties for resources
 		Properties prop = FileUpdater
-				.downloadProperties("http://dl.dropbox.com/s/ag91p4f653q4asl/ResourcesVersions.txt");
+				.downloadProperties("http://dl.dropbox.com/s/ag91p4f653sl/ResourcesVersions.txt");
 		if (prop == null) {
 			System.err
 					.println("MineTunes: Unable to download ResourcesVersions.txt");
