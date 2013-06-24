@@ -18,14 +18,14 @@
  * along with SavoyCraft. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package com.savoycraft.opera;
-
-import java.util.LinkedList;
+package com.savoycraft;
 
 /**
+ * A minecraft skin. For any mob.
+ * 
+ * @author BJ
  *
  */
-public class Show {
-	
-	private LinkedList<Scene> scenes = new LinkedList<Scene>();
+public class Skin {
+
 }
