@@ -61,6 +61,8 @@ public class TGScrollPanel extends TGComponent {
 		scrollbar = new TGScrollbar(x + width - scrollbarWidth, y + 0,
 				scrollbarWidth, height);
 		scrollbar.setScreenOffset(getScreenOffsetX(), getScreenOffsetY());
+		
+		setZLevel(0.5);
 	}
 
 	public TGScrollPanel add(TGComponent... component) {

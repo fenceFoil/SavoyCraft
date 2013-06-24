@@ -41,6 +41,8 @@ public class TGComponent extends Gui {
 	protected int y;
 	protected int width;
 	protected int height;
+	
+	protected double zLevel;
 
 	//public static final int DEFAULT_bgColor = 0xffeeee88;
 	public static final int DEFAULT_bgColor = 0xffffffcc;
@@ -370,4 +372,14 @@ public class TGComponent extends Gui {
 	public void setBgColorRollover(int bgColorRollover) {
 		this.bgColorRollover = bgColorRollover;
 	}
+
+	public double getZLevel() {
+		return zLevel;
+	}
+
+	public void setZLevel(double zLevel) {
+		this.zLevel = zLevel;
+	}
+
+
 }

@@ -20,6 +20,7 @@
  */
 package com.savoycraft.tempoGui;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
@@ -66,7 +67,7 @@ public class TGFrame extends GuiScreen {
 	 * Pixel dimensions of centered "frame:" decorative background which
 	 * components are displayed in.
 	 */
-	private int frameWidth = 300, frameHeight = 200;
+	private int frameWidth = 160, frameHeight = 100;
 
 	// private int frameColor = 0xddeeeeaa;
 	private int frameColor = TGComponent.DEFAULT_bgColor;
@@ -76,7 +77,7 @@ public class TGFrame extends GuiScreen {
 	private LinkedList<EQBar> leftCurtain = new LinkedList<EQBar>();
 	private LinkedList<EQBar> rightCurtain = new LinkedList<EQBar>();
 
-	private HashSet<TGComponent> components = new HashSet<TGComponent>();
+	private LinkedList<TGComponent> components = new LinkedList<TGComponent>();
 
 	public TGFrame(GuiScreen backScreen) {
 		this.backScreen = backScreen;
@@ -108,6 +109,7 @@ public class TGFrame extends GuiScreen {
 		// Draw buttons
 		super.drawScreen(mx, my, par3);
 
+		Collections.sort(components, new ZLevelComparator());
 		for (TGComponent c : components) {
 			c.draw(mx - getFrameX(), my - getFrameY());
 		}
