@@ -31,7 +31,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = "savoycraft", name = "SavoyCraft", version = "0.0.1")
+@Mod(modid = "savoycraft", name = "SavoyCraft", version = "0.1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class SavoyCraft implements IScheduledTickHandler {
 

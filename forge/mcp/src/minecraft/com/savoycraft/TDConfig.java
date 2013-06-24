@@ -35,6 +35,7 @@ import net.minecraft.client.Minecraft;
 
 import com.savoycraft.resources.UpdateResourcesThread;
 import com.savoycraft.update.CompareVersion;
+import com.savoycraft.update.ModVersion;
 
 /**
  * Represents the values stored in the MineTunes config file and other
@@ -46,7 +47,9 @@ public class TDConfig {
 	/**
 	 * Current mod version.
 	 */
-	public static final String CURRENT_VERSION = "0.0.2";
+	@Deprecated
+	public static final String CURRENT_VERSION = ModVersion.CURRENT_VERSION
+			.toString();
 	/**
 	 * Minecraft version that the mod is designed for.
 	 */
@@ -121,7 +124,8 @@ public class TDConfig {
 			load();
 
 			int versionCompare = CompareVersion.compareVersions(
-					CURRENT_VERSION, getStringWithDefault("mod.lastVersionRun", "0"));
+					CURRENT_VERSION,
+					getStringWithDefault("mod.lastVersionRun", "0"));
 
 			if (versionCompare == CompareVersion.GREATER) {
 				// Config is old

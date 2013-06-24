@@ -30,7 +30,9 @@ import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 
 import com.savoycraft.gui.TDEditCourseGui;
-import com.savoycraft.gui.TGFrame;
+import com.savoycraft.gui.theater.TheaterGui;
+import com.savoycraft.tempoGui.TGFrame;
+import com.savoycraft.theater.Theater;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
@@ -67,8 +69,7 @@ public class SavoyCraftKeyHandler extends KeyHandler {
 			} else {
 				// Minecraft.getMinecraft().displayGuiScreen(
 				// new TGFrame(null, 200, 150));
-				Minecraft.getMinecraft().displayGuiScreen(
-						new TDEditCourseGui(null));
+				Minecraft.getMinecraft().displayGuiScreen(new TheaterGui(null, new Theater()));
 			}
 		}
 	}
