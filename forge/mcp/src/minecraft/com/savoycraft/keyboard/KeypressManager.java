@@ -37,8 +37,6 @@ import net.minecraft.util.EnumOS;
 import org.lwjgl.input.Keyboard;
 
 import com.savoycraft.TDConfig;
-import com.savoycraft.gui.MinetunesGui;
-import com.savoycraft.gui.TDGui;
 
 public class KeypressManager {
 
@@ -158,8 +156,8 @@ public class KeypressManager {
 	private void executeAction(String action) {
 		if (action.equalsIgnoreCase("menu")) {
 			// Show menu
-			TDGui guiToOpen = new TDGui(null);
-			Minecraft.getMinecraft().displayGuiScreen(guiToOpen);
+			//TDGui guiToOpen = new TDGui(null);
+			//Minecraft.getMinecraft().displayGuiScreen(guiToOpen);
 		}
 	}
 

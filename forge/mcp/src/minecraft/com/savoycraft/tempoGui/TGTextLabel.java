@@ -20,8 +20,6 @@
  */
 package com.savoycraft.tempoGui;
 
-import com.savoycraft.resources.TDTextureManager;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 

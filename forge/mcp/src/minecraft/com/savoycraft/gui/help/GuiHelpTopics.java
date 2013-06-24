@@ -28,13 +28,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Properties;
 
-import com.minetunes.config.MinetunesConfig;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiScreen;
+import com.savoycraft.TDConfig;
 
 /**
  * @author William

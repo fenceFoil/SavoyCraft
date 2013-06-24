@@ -43,10 +43,11 @@ public class Theater {
 	private LinkedList<Show> shows = new LinkedList<Show>();
 
 	/**
+	 * @param theatreCode 
 	 * 
 	 */
-	public Theater() {
-		// TODO Auto-generated constructor stub
+	public Theater(String theatreCode) {
+		setTheaterID(theatreCode);
 	}
 
 	public String getName() {

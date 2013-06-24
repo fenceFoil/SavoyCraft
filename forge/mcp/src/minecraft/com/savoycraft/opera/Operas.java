@@ -20,12 +20,11 @@
  */
 package com.savoycraft.opera;
 
-import static com.esotericsoftware.minlog.Log.*;
+import static com.esotericsoftware.minlog.Log.info;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
-
-import net.minecraft.client.Minecraft;
 
 import com.savoycraft.TDConfig;
 import com.savoycraft.util.FileUtil;

@@ -26,14 +26,12 @@ package com.savoycraft.gui;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiScreen;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 
 import org.lwjgl.input.Keyboard;
 
-import com.minetunes.Minetunes;
-import com.minetunes.config.MinetunesConfig;
-import com.minetunes.keyboard.KeyBinding;
+import com.savoycraft.TDConfig;
 
 public class KeysGui extends GuiScreen {
 	private LinkedList<GuiButton> keyButtons = new LinkedList<GuiButton>();

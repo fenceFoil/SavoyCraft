@@ -20,10 +20,6 @@
  */
 package com.savoycraft.tempoGui;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-
-import com.savoycraft.resources.TDTextureManager;
 import com.savoycraft.tempoGui.event.TGEvent;
 
 /**

@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.savoycraft.TDConfig;
-import com.savoycraft.SavoyCraft;
 import com.savoycraft.update.CompareVersion;
 import com.savoycraft.update.FileUpdater;
 

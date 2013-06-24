@@ -22,7 +22,6 @@ package com.savoycraft.tempoGui;
 
 import java.awt.Rectangle;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.lwjgl.input.Keyboard;

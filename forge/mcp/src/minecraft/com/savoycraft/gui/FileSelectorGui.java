@@ -27,13 +27,13 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiScreen;
-import net.minecraft.src.GuiTextField;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 
 import org.lwjgl.input.Keyboard;
 
-import com.minetunes.config.MinetunesConfig;
+import com.savoycraft.TDConfig;
 
 public class FileSelectorGui extends GuiScreen {
 

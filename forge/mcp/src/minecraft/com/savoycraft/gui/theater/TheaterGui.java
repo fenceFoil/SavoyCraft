@@ -26,7 +26,6 @@ import net.minecraft.client.gui.GuiScreen;
 import com.savoycraft.tempoGui.TGButton;
 import com.savoycraft.tempoGui.TGFrame;
 import com.savoycraft.tempoGui.TGListener;
-import com.savoycraft.tempoGui.TGTextLabel;
 import com.savoycraft.tempoGui.event.TGEvent;
 import com.savoycraft.theater.Theater;
 

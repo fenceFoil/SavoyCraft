@@ -29,16 +29,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.GuiMainMenu;
-import net.minecraft.src.StatList;
-import net.minecraft.src.WorldClient;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.stats.StatList;
 
-import com.minetunes.Minetunes;
-import com.minetunes.Point3D;
-import com.minetunes.config.MinetunesConfig;
-import com.minetunes.resources.ResourceManager;
-import com.minetunes.signs.SignTuneParser;
-import com.minetunes.signs.Comment;
+import com.savoycraft.TDConfig;
+import com.savoycraft.resources.ResourceManager;
 
 /**
  * Manages checking the version of and downloading MineTunesLand from the

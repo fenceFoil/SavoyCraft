@@ -23,8 +23,6 @@ package com.savoycraft.tempoGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
-import org.lwjgl.opengl.GL11;
-
 import com.savoycraft.resources.TDTextureManager;
 import com.savoycraft.tempoGui.event.TGEvent;
 

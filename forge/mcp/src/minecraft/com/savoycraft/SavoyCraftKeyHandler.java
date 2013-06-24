@@ -29,9 +29,7 @@ import net.minecraft.client.settings.KeyBinding;
 
 import org.lwjgl.input.Keyboard;
 
-import com.savoycraft.gui.TDEditCourseGui;
 import com.savoycraft.gui.theater.TheaterGui;
-import com.savoycraft.tempoGui.TGFrame;
 import com.savoycraft.theater.Theater;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;

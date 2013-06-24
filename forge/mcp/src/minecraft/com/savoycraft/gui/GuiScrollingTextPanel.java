@@ -27,13 +27,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.Gui;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
-import com.minetunes.Finder;
 
 /**
  * A widget that renders a scrollable text pane (uneditable) in a Minecraft gui.

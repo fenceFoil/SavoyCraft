@@ -23,7 +23,6 @@
  */
 package com.savoycraft.gui.settings;
 
-import com.minetunes.config.MidiVolumeMode;
 
 /**
  * @author William

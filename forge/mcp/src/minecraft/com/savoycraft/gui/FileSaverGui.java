@@ -25,14 +25,14 @@ package com.savoycraft.gui;
 
 import java.io.File;
 
-import net.minecraft.src.ChatAllowedCharacters;
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiScreen;
-import net.minecraft.src.GuiTextField;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.util.ChatAllowedCharacters;
 
 import org.lwjgl.input.Keyboard;
 
-import com.minetunes.config.MinetunesConfig;
+import com.savoycraft.TDConfig;
 
 public class FileSaverGui extends GuiScreen {
 

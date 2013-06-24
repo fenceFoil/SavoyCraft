@@ -23,8 +23,6 @@
  */
 package com.savoycraft.gui.settings;
 
-import net.minecraft.src.GuiButton;
-import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
 
 /**

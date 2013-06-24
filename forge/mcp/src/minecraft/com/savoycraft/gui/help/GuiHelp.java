@@ -35,14 +35,13 @@ import java.util.LinkedList;
 import java.util.Properties;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiScreen;
-import net.minecraft.src.Tessellator;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 
 import org.lwjgl.opengl.GL11;
 
-import com.minetunes.config.MinetunesConfig;
-import com.minetunes.gui.GuiButtonRect;
+import com.savoycraft.TDConfig;
+import com.savoycraft.gui.GuiButtonRect;
 
 /**
  * @author William

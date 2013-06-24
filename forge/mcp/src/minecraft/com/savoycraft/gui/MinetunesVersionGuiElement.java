@@ -24,11 +24,10 @@
 package com.savoycraft.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.GuiButton;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
 
-import com.minetunes.Minetunes;
-import com.minetunes.config.MinetunesConfig;
+import com.savoycraft.TDConfig;
 
 /**
  * Displays a MineTunes version number on the upper left corner of the screen.

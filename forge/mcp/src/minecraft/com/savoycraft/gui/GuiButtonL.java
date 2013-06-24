@@ -29,11 +29,9 @@ import java.util.HashSet;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.GuiButton;
+import net.minecraft.client.gui.GuiButton;
 
 import org.lwjgl.opengl.GL11;
-
-import com.minetunes.Minetunes;
 
 /**
  * An extended version of Minecraft's GuiButton, with icon (alone, or with text)

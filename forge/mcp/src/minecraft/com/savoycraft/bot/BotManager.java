@@ -25,7 +25,6 @@ import java.util.LinkedList;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
-import aurelienribon.tweenengine.equations.Bounce;
 import aurelienribon.tweenengine.equations.Sine;
 
 import com.savoycraft.cue.Cue;
