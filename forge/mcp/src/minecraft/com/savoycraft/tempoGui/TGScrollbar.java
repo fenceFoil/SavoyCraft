@@ -27,6 +27,9 @@ import com.savoycraft.resources.TDTextureManager;
 import com.savoycraft.tempoGui.event.TGEvent;
 
 /**
+ * A vertical scrollbar. Call "getSliderSizeRatio()" with the ratio between
+ * window size / content size to adjust the size of the scroll handle.
+ * 
  * @author BJ
  * 
  */

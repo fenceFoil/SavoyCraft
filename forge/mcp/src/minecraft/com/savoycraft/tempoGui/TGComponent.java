@@ -30,7 +30,7 @@ import com.savoycraft.tempoGui.event.TGEvent;
 import com.savoycraft.util.ColorUtil;
 
 /**
- * 
+ * Base class for components. 
  *
  */
 public class TGComponent extends Gui {
@@ -284,19 +284,19 @@ public class TGComponent extends Gui {
 		}
 	}
 
-	/**
-	 * 
-	 * @param components
-	 *            4-element float array, rgba
-	 * @return
-	 */
-	public static int getColorAsInt(float[] components) {
-		int color = (int) (components[2] * 255f);
-		color += (int) (components[1] * 255f) << 8;
-		color += (int) (components[0] * 255f) << 16;
-		color += (int) (components[3] * 255f) << 24;
-		return color;
-	}
+//	/**
+//	 * 
+//	 * @param components
+//	 *            4-element float array, rgba
+//	 * @return
+//	 */
+//	public static int getColorAsInt(float[] components) {
+//		int color = (int) (components[2] * 255f);
+//		color += (int) (components[1] * 255f) << 8;
+//		color += (int) (components[0] * 255f) << 16;
+//		color += (int) (components[3] * 255f) << 24;
+//		return color;
+//	}
 
 	/**
 	 * Equivalent to drawBorder(0)

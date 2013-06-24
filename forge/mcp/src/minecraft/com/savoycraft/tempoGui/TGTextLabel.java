@@ -26,11 +26,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
 /**
- *
+ * Compare with Swing's JLabel.
  */
 public class TGTextLabel extends TGComponent {
 
 	private static final int MARGINS = 2;
+	/**
+	 * You can't really change this. 
+	 */
 	private static final int TEXT_HEIGHT = 8;
 	protected String labelText;
 

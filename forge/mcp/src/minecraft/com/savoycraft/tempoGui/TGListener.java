@@ -23,7 +23,10 @@ package com.savoycraft.tempoGui;
 import com.savoycraft.tempoGui.event.TGEvent;
 
 /**
- * @author BJ
+ * Any component can have TGListeners registered with it. Some components fire
+ * sub-classes of TGEvent to indicate actions, others, like simple buttons, just
+ * fire a TGEvent with no other info, and some don't use registered listeners at
+ * all. Compare ActionListener in Swing.
  * 
  */
 public interface TGListener {

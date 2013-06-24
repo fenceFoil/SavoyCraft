@@ -29,6 +29,8 @@ import com.savoycraft.resources.TDTextureManager;
 import com.savoycraft.tempoGui.event.TGEvent;
 
 /**
+ * A button component. Has a label, and the height can be resized as you wish, unlike the Minecraft gui's button.
+ * 
  * @author BJ
  * 
  */

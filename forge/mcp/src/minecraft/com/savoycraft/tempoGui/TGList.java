@@ -22,10 +22,18 @@ package com.savoycraft.tempoGui;
 
 import java.util.LinkedList;
 
+import com.savoycraft.tempoGui.event.TGAddButtonEvent;
 import com.savoycraft.tempoGui.event.TGEvent;
 import com.savoycraft.tempoGui.event.TGListEvent;
 
 /**
+ * A list of buttons, that automatically adds a scrollbar if the list is long
+ * enough. Also provided is an optional small, green "+" or add button at the
+ * end of the list. To use, provide a list of items with the constructor. If you
+ * need to change the list after that, use "setItems" or change the list with
+ * "getItems," then call updateItems(). This component throws two classes of
+ * events, for normal button clicks and clicking on the "add button."
+ * 
  * @author BJ
  * 
  */
@@ -53,11 +61,11 @@ public class TGList extends TGScrollPanel {
 	public void updateItems() {
 		components.clear();
 
+		final TGList thisList = this;
 		int buttonHeight = 14;
 		int buttonSpacing = 15;
 		for (int i = 0; i < items.size(); i++) {
 			final int iFinal = i;
-			final TGList thisList = this;
 			TGButton newButton = new TGButton(scrollbar.getWidth() + 3,
 					buttonSpacing * i, getWidth() - scrollbar.getWidth() * 2
 							- 3 * 2, buttonHeight, items.get(i));
@@ -76,6 +84,13 @@ public class TGList extends TGScrollPanel {
 			int buttonMaxWidth = getWidth() - scrollbar.getWidth() * 2 - 3 * 2;
 			addButton = new TGButton(buttonMaxWidth / 2, buttonSpacing
 					* items.size(), addButtonWidth, buttonHeight, "+");
+			addButton.addListener(new TGListener() {
+
+				@Override
+				public void onTGEvent(TGEvent event) {
+					fireTGEvent(new TGAddButtonEvent(thisList));
+				}
+			});
 			addButton.setBgColor(0xff44ff22);
 			components.add(addButton);
 		}

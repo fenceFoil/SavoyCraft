@@ -29,6 +29,8 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 /**
+ * A vertically-scrolling panel of TGComponents.
+ * 
  * @author BJ
  * 
  */

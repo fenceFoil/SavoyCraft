@@ -30,6 +30,9 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 
 /**
+ * A panel of components, with separate tabs of components accessible by buttons
+ * along the top.
+ * 
  * @author BJ
  * 
  */
