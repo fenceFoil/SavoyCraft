@@ -25,9 +25,11 @@ import net.minecraft.client.gui.FontRenderer;
 
 import com.savoycraft.resources.TDTextureManager;
 import com.savoycraft.tempoGui.event.TGEvent;
+import com.savoycraft.util.FontRendererUtil;
 
 /**
- * A button component. Has a label, and the height can be resized as you wish, unlike the Minecraft gui's button.
+ * A button component. Has a label, and the height can be resized as you wish,
+ * unlike the Minecraft gui's button.
  * 
  * @author BJ
  * 
@@ -39,7 +41,7 @@ public class TGButton extends TGComponent {
 
 	public TGButton(int x, int y, int width, int height, String label) {
 		super(x, y, width, height);
-		this.label = label;
+		setLabel(label);
 	}
 
 	public TGButton(int x, int y, int width, int height) {
@@ -118,7 +120,12 @@ public class TGButton extends TGComponent {
 	}
 
 	public void setLabel(String label) {
-		this.label = label;
+		if (Minecraft.getMinecraft().fontRenderer.getStringWidth(label) > getWidth() - 8) {
+			this.label = FontRendererUtil.trimToLength(label, getWidth() - 8);
+			this.label += "..";
+		} else {
+			this.label = label;
+		}
 	}
 
 }
