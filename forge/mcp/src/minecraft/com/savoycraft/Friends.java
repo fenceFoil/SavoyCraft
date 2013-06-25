@@ -35,6 +35,6 @@ public class Friends {
 	public Friends() {
 	}
 	
-	
+	public String loadFriendsList(S)
 
 }
