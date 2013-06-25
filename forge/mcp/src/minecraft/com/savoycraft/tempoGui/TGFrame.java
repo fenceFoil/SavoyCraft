@@ -61,7 +61,7 @@ public class TGFrame extends GuiScreen {
 	private static final int FADE_OUT_WIDTH = 7;
 	private static final int ROPE_HEIGHT = 4;
 	private String typedKeys = "";
-	private GuiScreen backScreen;
+	public GuiScreen backScreen;
 
 	/**
 	 * Pixel dimensions of centered "frame:" decorative background which
@@ -97,6 +97,8 @@ public class TGFrame extends GuiScreen {
 	@Override
 	public void drawScreen(int mx, int my, float par3) {
 		updateTweens();
+		
+		updateComponentOffsets();
 
 		// draw background
 		// drawMinetunesBackground(width, height);
@@ -209,7 +211,7 @@ public class TGFrame extends GuiScreen {
 	}
 
 	public int getFrameY() {
-		return 20 + (height - frameHeight) / 2;
+		return (height - frameHeight) / 2;
 	}
 
 	public void setFrameWidth(int frameWidth) {
@@ -305,7 +307,7 @@ public class TGFrame extends GuiScreen {
 	protected void mouseMovedOrUp(int par1, int par2, int par3) {
 		super.mouseMovedOrUp(par1, par2, par3);
 
-		for (TGComponent c : components) {
+		for (TGComponent c : (LinkedList<TGComponent>) components.clone()) {
 			c.mouseMovedOrUp(par1 - getFrameX(), par2 - getFrameY(), par3);
 		}
 	}
@@ -323,6 +325,8 @@ public class TGFrame extends GuiScreen {
 
 		updateEQBarPositions();
 		animateCurtains(true);
+		
+		Keyboard.enableRepeatEvents(true);
 
 		// Update components
 		for (TGComponent c : components) {
@@ -332,6 +336,7 @@ public class TGFrame extends GuiScreen {
 
 	@Override
 	public void onGuiClosed() {
+		Keyboard.enableRepeatEvents(false);
 		super.onGuiClosed();
 	}
 
@@ -381,6 +386,14 @@ public class TGFrame extends GuiScreen {
 				// pulseEQ(1, false);
 			}
 		});
+	}
+
+	public void remove(TGComponent component) {
+		components.remove(component);
+	}
+	
+	public void removeAll() {
+		components.clear();
 	}
 
 	private void updateEQBarPositions() {
