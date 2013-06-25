@@ -60,6 +60,7 @@ public class ShowsGui extends TGFrame {
 
 		TGList list = new TGList(0, 20, getFrameWidth(), getFrameHeight() - 40,
 				false, 20, shows);
+		list.setButtonHeight(20);
 		list.setAddButtonEnabled(true);
 		list.addListener(new TGListener() {
 

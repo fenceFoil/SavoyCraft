@@ -16,7 +16,7 @@ import com.savoycraft.bot.BotManager;
 import com.savoycraft.conductor.Conductor;
 import com.savoycraft.gui.theater.TheaterGui;
 import com.savoycraft.keyboard.KeypressManager;
-import com.savoycraft.opera.Operas;
+import com.savoycraft.opera.OperaManager;
 import com.savoycraft.theater.Theater;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
@@ -83,7 +83,7 @@ public class SavoyCraft implements IScheduledTickHandler {
 		});
 
 		// Load operas
-		Operas.loadOperas();
+		OperaManager.loadOperas();
 	}
 
 	@PostInit

@@ -23,7 +23,7 @@ package com.savoycraft.theater;
 import java.util.LinkedList;
 
 import com.savoycraft.Skin;
-import com.savoycraft.opera.Scene;
+import com.savoycraft.opera.OperaScene;
 import com.savoycraft.update.ModVersion;
 
 /**
@@ -78,11 +78,11 @@ public class Show {
 		this.modVersion = modVersion;
 	}
 
-	public LinkedList<Scene> getScenes() {
+	public LinkedList<ShowScene> getScenes() {
 		return scenes;
 	}
 
-	public void setScenes(LinkedList<Scene> scenes) {
+	public void setScenes(LinkedList<ShowScene> scenes) {
 		this.scenes = scenes;
 	}
 }

@@ -33,7 +33,7 @@ import net.minecraft.client.gui.GuiScreen;
 public class ShowGui extends TGFrame {
 
 	public ShowGui(GuiScreen thisGui, Theater theater, Show show) {
-		super(thisGui);
+		super(thisGui, show.getName());
 	}
 
 }

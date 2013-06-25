@@ -23,6 +23,7 @@ package com.savoycraft.theater;
 import java.util.LinkedList;
 
 import com.savoycraft.User;
+import com.savoycraft.opera.OperaScene;
 import com.savoycraft.update.ModVersion;
 
 /**
@@ -32,5 +33,33 @@ public class ShowScene {
 	private String sceneID;
 	private ModVersion sceneVersion;
 	private LinkedList<User> cast;
-	
+
+	public ShowScene(OperaScene scene) {
+		setSceneID(scene.getHandle());
+	}
+
+	public String getSceneID() {
+		return sceneID;
+	}
+
+	public void setSceneID(String sceneID) {
+		this.sceneID = sceneID;
+	}
+
+	public ModVersion getSceneVersion() {
+		return sceneVersion;
+	}
+
+	public void setSceneVersion(ModVersion sceneVersion) {
+		this.sceneVersion = sceneVersion;
+	}
+
+	public LinkedList<User> getCast() {
+		return cast;
+	}
+
+	public void setCast(LinkedList<User> cast) {
+		this.cast = cast;
+	}
+
 }

@@ -24,6 +24,7 @@ import static com.esotericsoftware.minlog.Log.info;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.savoycraft.TDConfig;
@@ -33,7 +34,7 @@ import com.savoycraft.util.FileUtil;
  * 
  *
  */
-public class Operas {
+public class OperaManager {
 	private static HashMap<String, Opera> operas = new HashMap<String, Opera>();
 
 	/**
@@ -65,4 +66,29 @@ public class Operas {
 	public static Opera getOpera(String handle) {
 		return operas.get(handle);
 	}
+
+	public static HashMap<String, Opera> getOperas() {
+		return operas;
+	}
+
+	public static LinkedList<String> getOperaTitles() {
+		LinkedList<String> titles = new LinkedList<String>();
+		for (Opera o : operas.values()) {
+			titles.add(o.getName());
+		}
+		return titles;
+	}
+
+	public static LinkedList<Opera> getOperaList() {
+		LinkedList<Opera> operas = new LinkedList<Opera>();
+		operas.addAll(OperaManager.operas.values());
+		return operas;
+	}
+
+	public static OperaScene getScene(String handle) {
+		String[] parts = handle.split(":");
+		Opera opera = getOpera(parts[0]);
+		return opera.getScene(handle);
+	}
+
 }

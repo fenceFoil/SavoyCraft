@@ -41,7 +41,7 @@ public class Opera {
 
 	private File sourceFile;
 
-	private LinkedList<Scene> scenes = new LinkedList<Scene>();
+	private LinkedList<OperaScene> scenes = new LinkedList<OperaScene>();
 
 	private LinkedList<Character> characters = new LinkedList<Character>();
 
@@ -100,7 +100,7 @@ public class Opera {
 		LinkedList<Element> sceneElements = DOMUtil.findElements("scene",
 				operaNodes);
 		for (Element sceneElement : sceneElements) {
-			Scene scene = Scene.load(sceneElement);
+			OperaScene scene = OperaScene.load(sceneElement);
 			if (scene != null) {
 				opera.scenes.add(scene);
 			}
@@ -129,8 +129,8 @@ public class Opera {
 	 * 
 	 * @return
 	 */
-	public LinkedList<Scene> getScenes() {
-		return (LinkedList<Scene>) scenes.clone();
+	public LinkedList<OperaScene> getScenes() {
+		return (LinkedList<OperaScene>) scenes.clone();
 	}
 
 	/**
@@ -139,8 +139,8 @@ public class Opera {
 	 * @param handle
 	 * @return
 	 */
-	public Scene getScene(String handle) {
-		for (Scene s : scenes) {
+	public OperaScene getScene(String handle) {
+		for (OperaScene s : scenes) {
 			if (s.getHandle().equals(handle)) {
 				return s;
 			}
