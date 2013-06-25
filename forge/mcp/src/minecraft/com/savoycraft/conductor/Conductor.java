@@ -28,8 +28,8 @@ import java.util.LinkedList;
 import com.savoycraft.SavoyCraft;
 import com.savoycraft.cue.Cue;
 import com.savoycraft.opera.Opera;
-import com.savoycraft.opera.Operas;
-import com.savoycraft.opera.Scene;
+import com.savoycraft.opera.OperaManager;
+import com.savoycraft.opera.OperaScene;
 
 import cpw.mods.fml.common.IScheduledTickHandler;
 import cpw.mods.fml.common.TickType;
@@ -44,7 +44,7 @@ public class Conductor implements IScheduledTickHandler {
 	private String charHandle;
 	private String sceneHandle;
 	private Opera opera;
-	private Scene scene;
+	private OperaScene scene;
 	private boolean sceneStarted = false;
 	
 	//private static double LATENCY_CORRECTION = 1d;
@@ -60,7 +60,7 @@ public class Conductor implements IScheduledTickHandler {
 	public void playScene(String handle) {
 		String[] handles = handle.split(":");
 
-		opera = Operas.getOpera(handles[0]);
+		opera = OperaManager.getOpera(handles[0]);
 
 		if (opera == null) {
 			info("Conductor cannot play handle: " + handle);
