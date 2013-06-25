@@ -33,10 +33,11 @@ import com.savoycraft.util.DOMUtil;
 /**
  *
  */
-public class Scene {
+public class OperaScene {
 
 	private int pos = 0;
 	private String handle = "";
+	private String name = "";
 
 	/**
 	 * Stores one beat track per character in the scene
@@ -45,11 +46,12 @@ public class Scene {
 
 	private LinkedList<String> featuredCharacters = new LinkedList<String>();
 
-	public static Scene load(Element sceneElement) {
+	public static OperaScene load(Element sceneElement) {
 		NodeList sceneNodes = sceneElement.getChildNodes();
 
-		Scene scene = new Scene();
+		OperaScene scene = new OperaScene();
 		scene.setHandle(Opera.getTextElement("handle", sceneNodes));
+		scene.setName(Opera.getTextElement("name", sceneNodes));
 
 		// Load characters
 		LinkedList<Element> characterElements = DOMUtil.findElements(
@@ -123,6 +125,14 @@ public class Scene {
 		}
 
 		return found;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String title) {
+		this.name = title;
 	}
 
 }
