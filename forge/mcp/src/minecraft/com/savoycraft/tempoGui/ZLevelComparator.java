@@ -45,9 +45,9 @@ public class ZLevelComparator implements Comparator {
 		TGComponent comp1 = (TGComponent) arg0;
 		TGComponent comp2 = (TGComponent) arg1;
 		if (comp1.getZLevel() > comp2.getZLevel()) {
-			return 1;
-		} else if (comp2.getZLevel() < comp2.getZLevel()) {
 			return -1;
+		} else if (comp2.getZLevel() < comp2.getZLevel()) {
+			return 1;
 		} else {
 			return 0;
 		}
