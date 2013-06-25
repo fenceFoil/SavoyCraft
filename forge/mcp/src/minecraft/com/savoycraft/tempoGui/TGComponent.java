@@ -45,7 +45,7 @@ public class TGComponent extends Gui {
 	protected double zLevel;
 
 	//public static final int DEFAULT_bgColor = 0xffeeee88;
-	public static final int DEFAULT_bgColor = 0xffffffcc;
+	public static final int DEFAULT_bgColor = 0xbbffffcc;
 	public static final int DEFAULT_borderColor = 0xff111100;
 	public static final int DEFAULT_labelColor = 0xff000000;
 	public static final int DEFAULT_bgColorRollover = 0xffaaaaff;
