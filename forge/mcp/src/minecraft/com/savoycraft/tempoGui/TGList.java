@@ -42,6 +42,7 @@ public class TGList extends TGScrollPanel {
 	private LinkedList<String> items;
 	private boolean addButtonEnabled;
 	private TGButton addButton;
+	private int buttonHeight = 14;
 
 	/**
 	 * @param x
@@ -62,8 +63,7 @@ public class TGList extends TGScrollPanel {
 		components.clear();
 
 		final TGList thisList = this;
-		int buttonHeight = 14;
-		int buttonSpacing = 15;
+		int buttonSpacing = buttonHeight / 10 + buttonHeight;
 		for (int i = 0; i < items.size(); i++) {
 			final int iFinal = i;
 			TGButton newButton = new TGButton(scrollbar.getWidth() + 3,
@@ -80,9 +80,9 @@ public class TGList extends TGScrollPanel {
 		}
 
 		if (addButtonEnabled) {
-			int addButtonWidth = (int) ((float) buttonHeight * 1.6f);
+			int addButtonWidth = (int) ((float) buttonHeight * 3.6f);
 			int buttonMaxWidth = getWidth() - scrollbar.getWidth() * 2 - 3 * 2;
-			addButton = new TGButton(buttonMaxWidth / 2, buttonSpacing
+			addButton = new TGButton(getWidth() / 2 - addButtonWidth / 2, buttonSpacing
 					* items.size(), addButtonWidth, buttonHeight, "+");
 			addButton.addListener(new TGListener() {
 
@@ -112,6 +112,14 @@ public class TGList extends TGScrollPanel {
 		this.addButtonEnabled = addButtonEnabled;
 
 		updateItems();
+	}
+
+	public int getButtonHeight() {
+		return buttonHeight;
+	}
+
+	public void setButtonHeight(int buttonHeight) {
+		this.buttonHeight = buttonHeight;
 	}
 
 }
